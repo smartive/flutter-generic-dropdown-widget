@@ -31,7 +31,7 @@ jobs:
           channel: 'stable'
       - run: flutter pub get
       - name: Build Storybook
-        run: flutter build web
+        run: flutter build web --base-href /flutter-generic-dropdown-widget/
         working-directory: example
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
