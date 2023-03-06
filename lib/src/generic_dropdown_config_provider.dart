@@ -13,6 +13,9 @@ import 'package:flutter/widgets.dart';
 /// utilize the root storybook as root screen key to calculate
 /// the position of the content.
 class GenericDropdownConfigProvider extends InheritedWidget {
+  /// The key of the root screen that contains the dropdown.
+  /// The screen is used to calculate the relative position
+  /// of the content overlay to the toggle.
   final GlobalKey? rootScreenKey;
 
   const GenericDropdownConfigProvider({super.key, this.rootScreenKey, required super.child});

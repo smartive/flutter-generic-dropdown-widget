@@ -2,36 +2,91 @@ import 'package:flutter/material.dart';
 
 import './generic_dropdown_config_provider.dart';
 
-/// TODO
+/// Determines the anchor of the dropdown. The
+/// anchor is relative to the toggle and is used
+/// to place the content when showing the dropdown.
 enum DropdownAnchor {
+  /// The top left corner of the
+  /// toggle is used as anchor.
   topLeft,
+
+  /// The top right corner of the
+  /// toggle is used as anchor.
   topRight,
+
+  /// The bottom left corner of the
+  /// toggle is used as anchor.
   bottomLeft,
+
+  /// The bottom right corner of the
+  /// toggle is used as anchor.
   bottomRight,
 }
 
-/// TODO
+/// Determines the direction of the content.
+/// In combination with the [DropdownAnchor],
+/// the dropdown will be positioned relative to the toggle.
 enum DropdownDirection {
+  /// The content will be positioned with the bottom
+  /// right edge to the [DropdownAnchor] and opens to the top left.
   upLeft,
+
+  /// The content will be positioned with the bottom
+  /// left edge to the [DropdownAnchor] and opens to the top right.
   upRight,
+
+  /// The content will be positioned with the top
+  /// right edge to the [DropdownAnchor] and opens to the bottom left.
   downLeft,
+
+  /// The content will be positioned with the top
+  /// left edge to the [DropdownAnchor] and opens to the bottom right.
   downRight,
 }
 
-/// TODO
-class GenericDropdown extends StatefulWidget {
-  final Widget Function(BuildContext context, VoidCallback repaint, VoidCallback close) contentBuilder;
+typedef ContentBuilder = Widget Function(BuildContext context, VoidCallback repaint, VoidCallback close);
+typedef ToggleBuilder = Widget Function(BuildContext context, bool isOpen);
 
+/// A generic dropdown widget that enables arbitrary content
+/// with an arbitrary toggle widget. The content can be placed
+/// relative to the toggle in any direction with the
+/// [anchor] and [direction] configuration.
+///
+/// The offset enables additional possitioning options for the
+/// content. The [contentBuilder] receives a "repaint" and a
+/// "close" callbacks, which can help updating the content
+/// or closing the content entirely.
+class GenericDropdown extends StatefulWidget {
+  /// A builder for the content of the dropdown. Creates the
+  /// content of the dropdown.
+  ///
+  /// This builder inserts two callbacks to the child that can be called from content
+  /// components: [repaint] and [close]. The [repaint] will trigger a "setState" in the
+  /// content and should repaint the content (to update objects inside the content), while
+  /// [close] will close the dropdown.
+  final ContentBuilder contentBuilder;
+
+  /// The anchor of the dropdown. Defines
+  /// on which point of the toggle the content
+  /// will be anchored. Defaults to [DropdownAnchor.bottomLeft].
   final DropdownAnchor anchor;
+
+  /// The direction of the content. Defines
+  /// how the content will be "opened".
+  /// Defaults to [DropdownDirection.downRight].
   final DropdownDirection direction;
 
   /// The widget that will be used to toggle the dropdown.
+  /// Receives a boolean value (`isOpen`) that indicates if the content
+  /// is shown or not.
   /// Be aware that if the widget you return captures mouse events,
   /// you need to ensure that the mouse events are passed to the dropdown.
-  final Widget Function(BuildContext context, bool isOpen) toggleBuilder;
+  final ToggleBuilder toggleBuilder;
 
   /// Additional offset to the dropdown position.
-  final Offset? offset;
+  /// The offset is calculated in the direction of the
+  /// [DropdownDirection]. Defaults to [Offset.zero].
+  final Offset offset;
 
   const GenericDropdown(
       {super.key,
@@ -39,7 +94,7 @@ class GenericDropdown extends StatefulWidget {
       this.anchor = DropdownAnchor.bottomLeft,
       this.direction = DropdownDirection.downRight,
       required this.toggleBuilder,
-      this.offset});
+      this.offset = Offset.zero});
 
   @override
   State<GenericDropdown> createState() => _GenericDropdownState();
