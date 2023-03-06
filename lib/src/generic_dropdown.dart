@@ -88,12 +88,17 @@ class GenericDropdown extends StatefulWidget {
   /// [DropdownDirection]. Defaults to [Offset.zero].
   final Offset offset;
 
+  /// Whether the content should close if any click/tap happens
+  /// outside the content container. Defaults to `true`.
+  final bool closeOnOutsideTap;
+
   const GenericDropdown(
       {super.key,
       required this.contentBuilder,
       this.anchor = DropdownAnchor.bottomLeft,
       this.direction = DropdownDirection.downRight,
       required this.toggleBuilder,
+      this.closeOnOutsideTap = true,
       this.offset = Offset.zero});
 
   @override
@@ -149,62 +154,62 @@ class _GenericDropdownState extends State<GenericDropdown> {
 
     // Anchor TOP LEFT
     if (widget.anchor == DropdownAnchor.topLeft && widget.direction == DropdownDirection.upLeft) {
-      bottom = screenSize.height - togglePosition.dy + (widget.offset?.dy ?? 0);
-      right = screenSize.width - togglePosition.dx + (widget.offset?.dx ?? 0);
+      bottom = screenSize.height - togglePosition.dy + widget.offset.dy;
+      right = screenSize.width - togglePosition.dx + widget.offset.dx;
     } else if (widget.anchor == DropdownAnchor.topLeft && widget.direction == DropdownDirection.upRight) {
-      bottom = screenSize.height - togglePosition.dy + (widget.offset?.dy ?? 0);
-      left = togglePosition.dx + (widget.offset?.dx ?? 0);
+      bottom = screenSize.height - togglePosition.dy + widget.offset.dy;
+      left = togglePosition.dx + widget.offset.dx;
     } else if (widget.anchor == DropdownAnchor.topLeft && widget.direction == DropdownDirection.downLeft) {
-      top = togglePosition.dy + (widget.offset?.dy ?? 0);
-      right = screenSize.width - togglePosition.dx + (widget.offset?.dx ?? 0);
+      top = togglePosition.dy + widget.offset.dy;
+      right = screenSize.width - togglePosition.dx + widget.offset.dx;
     } else if (widget.anchor == DropdownAnchor.topLeft && widget.direction == DropdownDirection.downRight) {
-      top = togglePosition.dy + (widget.offset?.dy ?? 0);
-      left = togglePosition.dx + (widget.offset?.dx ?? 0);
+      top = togglePosition.dy + widget.offset.dy;
+      left = togglePosition.dx + widget.offset.dx;
     }
 
     // Anchor TOP RIGHT
     if (widget.anchor == DropdownAnchor.topRight && widget.direction == DropdownDirection.upLeft) {
-      bottom = screenSize.height - togglePosition.dy + (widget.offset?.dy ?? 0);
-      right = screenSize.width - togglePosition.dx + (widget.offset?.dx ?? 0) - size.width;
+      bottom = screenSize.height - togglePosition.dy + widget.offset.dy;
+      right = screenSize.width - togglePosition.dx + widget.offset.dx - size.width;
     } else if (widget.anchor == DropdownAnchor.topRight && widget.direction == DropdownDirection.upRight) {
-      bottom = screenSize.height - togglePosition.dy + (widget.offset?.dy ?? 0);
-      left = togglePosition.dx + (widget.offset?.dx ?? 0) + size.width;
+      bottom = screenSize.height - togglePosition.dy + widget.offset.dy;
+      left = togglePosition.dx + widget.offset.dx + size.width;
     } else if (widget.anchor == DropdownAnchor.topRight && widget.direction == DropdownDirection.downLeft) {
-      top = togglePosition.dy + (widget.offset?.dy ?? 0);
-      right = screenSize.width - togglePosition.dx + (widget.offset?.dx ?? 0) - size.width;
+      top = togglePosition.dy + widget.offset.dy;
+      right = screenSize.width - togglePosition.dx + widget.offset.dx - size.width;
     } else if (widget.anchor == DropdownAnchor.topRight && widget.direction == DropdownDirection.downRight) {
-      top = togglePosition.dy + (widget.offset?.dy ?? 0);
-      left = togglePosition.dx + (widget.offset?.dx ?? 0) + size.width;
+      top = togglePosition.dy + widget.offset.dy;
+      left = togglePosition.dx + widget.offset.dx + size.width;
     }
 
     // Anchor BOTTOM LEFT
     if (widget.anchor == DropdownAnchor.bottomLeft && widget.direction == DropdownDirection.upLeft) {
-      bottom = screenSize.height - togglePosition.dy + (widget.offset?.dy ?? 0) - size.height;
-      right = screenSize.width - togglePosition.dx + (widget.offset?.dx ?? 0);
+      bottom = screenSize.height - togglePosition.dy + widget.offset.dy - size.height;
+      right = screenSize.width - togglePosition.dx + widget.offset.dx;
     } else if (widget.anchor == DropdownAnchor.bottomLeft && widget.direction == DropdownDirection.upRight) {
-      bottom = screenSize.height - togglePosition.dy + (widget.offset?.dy ?? 0) - size.height;
-      left = togglePosition.dx + (widget.offset?.dx ?? 0);
+      bottom = screenSize.height - togglePosition.dy + widget.offset.dy - size.height;
+      left = togglePosition.dx + widget.offset.dx;
     } else if (widget.anchor == DropdownAnchor.bottomLeft && widget.direction == DropdownDirection.downLeft) {
-      top = togglePosition.dy + (widget.offset?.dy ?? 0) + size.height;
-      right = screenSize.width - togglePosition.dx + (widget.offset?.dx ?? 0);
+      top = togglePosition.dy + widget.offset.dy + size.height;
+      right = screenSize.width - togglePosition.dx + widget.offset.dx;
     } else if (widget.anchor == DropdownAnchor.bottomLeft && widget.direction == DropdownDirection.downRight) {
-      top = togglePosition.dy + (widget.offset?.dy ?? 0) + size.height;
-      left = togglePosition.dx + (widget.offset?.dx ?? 0);
+      top = togglePosition.dy + widget.offset.dy + size.height;
+      left = togglePosition.dx + widget.offset.dx;
     }
 
     // Anchor BOTTOM RIGHT
     if (widget.anchor == DropdownAnchor.bottomRight && widget.direction == DropdownDirection.upLeft) {
-      bottom = screenSize.height - togglePosition.dy + (widget.offset?.dy ?? 0) - size.height;
-      right = screenSize.width - togglePosition.dx + (widget.offset?.dx ?? 0) - size.width;
+      bottom = screenSize.height - togglePosition.dy + widget.offset.dy - size.height;
+      right = screenSize.width - togglePosition.dx + widget.offset.dx - size.width;
     } else if (widget.anchor == DropdownAnchor.bottomRight && widget.direction == DropdownDirection.upRight) {
-      bottom = screenSize.height - togglePosition.dy + (widget.offset?.dy ?? 0) - size.height;
-      left = togglePosition.dx + (widget.offset?.dx ?? 0) + size.width;
+      bottom = screenSize.height - togglePosition.dy + widget.offset.dy - size.height;
+      left = togglePosition.dx + widget.offset.dx + size.width;
     } else if (widget.anchor == DropdownAnchor.bottomRight && widget.direction == DropdownDirection.downLeft) {
-      top = togglePosition.dy + (widget.offset?.dy ?? 0) + size.height;
-      right = screenSize.width - togglePosition.dx + (widget.offset?.dx ?? 0) - size.width;
+      top = togglePosition.dy + widget.offset.dy + size.height;
+      right = screenSize.width - togglePosition.dx + widget.offset.dx - size.width;
     } else if (widget.anchor == DropdownAnchor.bottomRight && widget.direction == DropdownDirection.downRight) {
-      top = togglePosition.dy + (widget.offset?.dy ?? 0) + size.height;
-      left = togglePosition.dx + (widget.offset?.dx ?? 0) + size.width;
+      top = togglePosition.dy + widget.offset.dy + size.height;
+      left = togglePosition.dx + widget.offset.dx + size.width;
     }
 
     _overlayEntry = OverlayEntry(
@@ -212,7 +217,7 @@ class _GenericDropdownState extends State<GenericDropdown> {
       builder: (context) => Material(
         color: Colors.transparent,
         child: GestureDetector(
-          onTap: _close,
+          onTap: () => widget.closeOnOutsideTap ? _close() : null,
           child: Container(
             alignment: Alignment.topLeft,
             color: Colors.transparent,
@@ -223,9 +228,17 @@ class _GenericDropdownState extends State<GenericDropdown> {
                   left: left,
                   bottom: bottom,
                   right: right,
-                  child: StatefulBuilder(
-                      builder: (context, setState) =>
-                          widget.contentBuilder.call(context, () => setState(() {}), _close)),
+                  child: GestureDetector(
+                    onTap: () {
+                      // this gesture detector prevents
+                      // the bubbling event that closes the
+                      // content on a click inside the
+                      // content.
+                    },
+                    child: StatefulBuilder(
+                        builder: (context, setState) =>
+                            widget.contentBuilder.call(context, () => setState(() {}), _close)),
+                  ),
                 ),
               ],
             ),

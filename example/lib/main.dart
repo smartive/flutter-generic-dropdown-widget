@@ -83,6 +83,11 @@ void main() {
                           description: 'The direction where the dropdown should open to.',
                           initial: DropdownDirection.downRight,
                           options: DropdownDirection.values.map((v) => Option(label: v.name, value: v)).toList()),
+                      closeOnOutsideTap: context.knobs.boolean(
+                          label: 'Close On Outside Tap',
+                          description:
+                              'Whether the content is closed on an outside tap or only if the content calls close().',
+                          initial: true),
                     )));
           })
     ],
