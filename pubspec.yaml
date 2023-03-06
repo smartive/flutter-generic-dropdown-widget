@@ -3,6 +3,7 @@ description: A generic dropdown for flutter. Enables displaying arbitrary conten
 version: 0.0.0
 homepage: https://smartive.github.io/flutter-generic-dropdown-widget/
 issue_tracker: https://github.com/smartive/flutter-generic-dropdown-widget/issues
+repository: https://github.com/smartive/flutter-generic-dropdown-widget.git
 
 environment:
   sdk: '>=2.19.3 <3.0.0'
