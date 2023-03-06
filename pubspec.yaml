@@ -1,0 +1,17 @@
+name: generic_dropdown_widget
+description: A generic dropdown for flutter. Enables displaying arbitrary content with an arbitrary toggle anywhere in the app.
+version: 0.0.0
+homepage: foo
+
+environment:
+  sdk: '>=2.19.3 <3.0.0'
+  flutter: '>=1.17.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
