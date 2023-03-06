@@ -1,0 +1,13 @@
+groupAndSortGetterMethods: true
+sortOtherMethods: true
+memberOrdering: public-static-variables
+  private-static-variables
+  public-override-variables
+  public-instance-variables
+  private-instance-variables
+  public-constructor
+  named-constructors
+  public-override-methods
+  public-other-methods
+  private-other-methods
+  build-method

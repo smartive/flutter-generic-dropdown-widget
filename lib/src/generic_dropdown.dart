@@ -57,6 +57,15 @@ typedef ToggleBuilder = Widget Function(BuildContext context, bool isOpen);
 /// "close" callbacks, which can help updating the content
 /// or closing the content entirely.
 class GenericDropdown extends StatefulWidget {
+  /// The anchor of the dropdown. Defines
+  /// on which point of the toggle the content
+  /// will be anchored. Defaults to [DropdownAnchor.bottomLeft].
+  final DropdownAnchor anchor;
+
+  /// Whether the content should close if any click/tap happens
+  /// outside the content container. Defaults to `true`.
+  final bool closeOnOutsideTap;
+
   /// A builder for the content of the dropdown. Creates the
   /// content of the dropdown.
   ///
@@ -66,15 +75,19 @@ class GenericDropdown extends StatefulWidget {
   /// [close] will close the dropdown.
   final ContentBuilder contentBuilder;
 
-  /// The anchor of the dropdown. Defines
-  /// on which point of the toggle the content
-  /// will be anchored. Defaults to [DropdownAnchor.bottomLeft].
-  final DropdownAnchor anchor;
-
   /// The direction of the content. Defines
   /// how the content will be "opened".
   /// Defaults to [DropdownDirection.downRight].
   final DropdownDirection direction;
+
+  /// Additional offset to the dropdown position.
+  /// The offset is calculated in the direction of the
+  /// [DropdownDirection]. Defaults to [Offset.zero].
+  final Offset offset;
+
+  /// Whether the content (dropdown) should be opened on render.
+  /// Defaults to `false`.
+  final bool openOnRender;
 
   /// The widget that will be used to toggle the dropdown.
   /// Receives a boolean value (`isOpen`) that indicates if the content
@@ -82,19 +95,6 @@ class GenericDropdown extends StatefulWidget {
   /// Be aware that if the widget you return captures mouse events,
   /// you need to ensure that the mouse events are passed to the dropdown.
   final ToggleBuilder toggleBuilder;
-
-  /// Additional offset to the dropdown position.
-  /// The offset is calculated in the direction of the
-  /// [DropdownDirection]. Defaults to [Offset.zero].
-  final Offset offset;
-
-  /// Whether the content should close if any click/tap happens
-  /// outside the content container. Defaults to `true`.
-  final bool closeOnOutsideTap;
-
-  /// Whether the content (dropdown) should be opened on render.
-  /// Defaults to `false`.
-  final bool openOnRender;
 
   const GenericDropdown(
       {super.key,
