@@ -92,6 +92,10 @@ class GenericDropdown extends StatefulWidget {
   /// outside the content container. Defaults to `true`.
   final bool closeOnOutsideTap;
 
+  /// Whether the content (dropdown) should be opened on render.
+  /// Defaults to `false`.
+  final bool openOnRender;
+
   const GenericDropdown(
       {super.key,
       required this.contentBuilder,
@@ -99,6 +103,7 @@ class GenericDropdown extends StatefulWidget {
       this.direction = DropdownDirection.downRight,
       required this.toggleBuilder,
       this.closeOnOutsideTap = true,
+      this.openOnRender = false,
       this.offset = Offset.zero});
 
   @override
@@ -114,6 +119,14 @@ class _GenericDropdownState extends State<GenericDropdown> {
     _overlayEntry?.remove();
     _overlayEntry = null;
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    if (widget.openOnRender) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _open(context));
+    }
+    super.initState();
   }
 
   RenderBox? _ancestor(BuildContext context) =>
