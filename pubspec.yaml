@@ -1,5 +1,6 @@
 name: generic_dropdown_widget
-description: A generic dropdown for flutter. Enables displaying arbitrary content with an arbitrary toggle anywhere in the app.
+description: A generic dropdown for flutter. Enables displaying arbitrary
+  content with an arbitrary toggle anywhere in the app.
 version: 0.0.0
 homepage: https://smartive.github.io/flutter-generic-dropdown-widget/
 issue_tracker: https://github.com/smartive/flutter-generic-dropdown-widget/issues
@@ -14,6 +15,6 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
