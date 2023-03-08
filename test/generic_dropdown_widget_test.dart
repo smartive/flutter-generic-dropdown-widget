@@ -9,14 +9,23 @@ class _PlacementCase {
   final DropdownDirection direction;
   final List<List<int>> translation;
 
-  Offset topLeft(Rect toggle, Rect content) =>
-      _anchor(toggle).translate(content.width * translation[0][0], content.height * translation[0][1]);
-  Offset topRight(Rect toggle, Rect content) =>
-      _anchor(toggle).translate(content.width * translation[1][0], content.height * translation[1][1]);
+  const _PlacementCase(
+    this.anchor,
+    this.direction, {
+    required this.translation,
+  });
+
   Offset bottomLeft(Rect toggle, Rect content) =>
       _anchor(toggle).translate(content.width * translation[2][0], content.height * translation[2][1]);
+
   Offset bottomRight(Rect toggle, Rect content) =>
       _anchor(toggle).translate(content.width * translation[3][0], content.height * translation[3][1]);
+
+  Offset topLeft(Rect toggle, Rect content) =>
+      _anchor(toggle).translate(content.width * translation[0][0], content.height * translation[0][1]);
+
+  Offset topRight(Rect toggle, Rect content) =>
+      _anchor(toggle).translate(content.width * translation[1][0], content.height * translation[1][1]);
 
   Offset _anchor(Rect toggle) {
     switch (anchor) {
@@ -30,12 +39,6 @@ class _PlacementCase {
         return toggle.bottomRight;
     }
   }
-
-  const _PlacementCase(
-    this.anchor,
-    this.direction, {
-    required this.translation,
-  });
 }
 
 void main() {
@@ -160,6 +163,112 @@ void main() {
 
       expect(find.byKey(toggleKey), findsOneWidget);
       expect(find.byKey(contentKey), findsOneWidget);
+    });
+
+    testWidgets('should not close content when "closeOnOutsideTap" is "false".', (tester) async {
+      const toggleKey = Key('toggle');
+      const contentKey = Key('content');
+
+      await tester.pumpWidget(_wrapper(GenericDropdown(
+        openOnRender: true,
+        closeOnOutsideTap: false,
+        toggleBuilder: (_, isOpen) => Container(
+          key: toggleKey,
+          height: 100,
+          width: 100,
+          color: Colors.red,
+        ),
+        contentBuilder: (_, __, ___) => Container(
+          key: contentKey,
+          height: 50,
+          width: 200,
+          color: Colors.blue,
+        ),
+      )));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(toggleKey));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(toggleKey), findsOneWidget);
+      expect(find.byKey(contentKey), findsOneWidget);
+    });
+
+    testWidgets('should be closable by content.', (tester) async {
+      const toggleKey = Key('toggle');
+      const contentKey = Key('content');
+      const closeButtonKey = Key('close');
+
+      await tester.pumpWidget(_wrapper(GenericDropdown(
+        openOnRender: true,
+        closeOnOutsideTap: false,
+        toggleBuilder: (_, isOpen) => Container(
+          key: toggleKey,
+          height: 100,
+          width: 100,
+          color: Colors.red,
+        ),
+        contentBuilder: (_, __, close) => Container(
+            key: contentKey,
+            height: 50,
+            width: 200,
+            color: Colors.blue,
+            child: TextButton(onPressed: close, key: closeButtonKey, child: const Text('Close'))),
+      )));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(toggleKey), findsOneWidget);
+      expect(find.byKey(contentKey), findsOneWidget);
+
+      await tester.tap(find.byKey(toggleKey));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(toggleKey), findsOneWidget);
+      expect(find.byKey(contentKey), findsOneWidget);
+
+      await tester.tap(find.byKey(closeButtonKey));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(toggleKey), findsOneWidget);
+      expect(find.byKey(contentKey), findsNothing);
+    });
+
+    testWidgets('should be repaintable by content.', (tester) async {
+      const toggleKey = Key('toggle');
+      const contentKey = Key('content');
+      const repaintButtonKey = Key('repaint');
+      var repaintCount = 0;
+
+      await tester.pumpWidget(_wrapper(GenericDropdown(
+        openOnRender: true,
+        closeOnOutsideTap: false,
+        toggleBuilder: (_, isOpen) => Container(
+          key: toggleKey,
+          height: 100,
+          width: 100,
+          color: Colors.red,
+        ),
+        contentBuilder: (_, repaint, ___) => Container(
+            key: contentKey,
+            height: 50,
+            width: 200,
+            color: Colors.blue,
+            child: TextButton(
+                onPressed: () {
+                  repaintCount++;
+                  repaint();
+                },
+                key: repaintButtonKey,
+                child: Text('paint: $repaintCount'))),
+      )));
+      await tester.pumpAndSettle();
+
+      expect(find.text('paint: 0'), findsOneWidget);
+
+      await tester.tap(find.byKey(repaintButtonKey));
+      await tester.pumpAndSettle();
+
+      expect(find.text('paint: 1'), findsOneWidget);
     });
 
     group('Content Placement -', () {
