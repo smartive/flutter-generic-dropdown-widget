@@ -1,2 +1,5 @@
 storybook/
 tools/
+build/
+coverage/
+renovate.json
