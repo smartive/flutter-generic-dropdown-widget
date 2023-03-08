@@ -12,3 +12,7 @@ linter:
     prefer_final_locals: true
     prefer_relative_imports: true
     prefer_single_quotes: true
+
+analyzer:
+  exclude:
+    - storybook/
