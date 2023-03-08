@@ -20,7 +20,7 @@ jobs:
       - name: Setup Stylizer
         run: mkdir tools && curl https://github.com/gmlewis/go-flutter-stylizer/releases/download/v0.1.7/flutter-stylizer-for-linux -Lo tools/flutter-stylizer && chmod +x tools/flutter-stylizer
       - run: flutter pub get
-      - run: tools/flutter-stylizer --config .flutter-stylizer.yaml -l -w lib/... -w test/... -w storybook/...
+      - run: tools/flutter-stylizer --config .flutter-stylizer.yaml -l lib/... test/... storybook/...
       - run: flutter analyze
       - run: flutter test --coverage
       - name: Setup LCOV
