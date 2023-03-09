@@ -20,7 +20,8 @@ void main() {
         home: Scaffold(
             body: SafeArea(
                 child: GenericDropdownConfigProvider(
-                    rootScreenKey: rootKey, child: Center(key: UniqueKey(), child: child))))),
+                    rootScreenKey: rootKey,
+                    child: Center(key: UniqueKey(), child: child))))),
     // initialStory: 'Generic Dropdown',
     stories: [
       _dropdown(),
@@ -73,26 +74,37 @@ Story _dropdown() => Story(
             toggleBuilder: (context, isOpen) => Container(
               height: 120,
               width: 120,
-              color: isOpen ? Colors.amber.withOpacity(.25) : Colors.blue.withOpacity(.25),
+              color: isOpen
+                  ? Colors.amber.withOpacity(.25)
+                  : Colors.blue.withOpacity(.25),
               child: Text('Toggle (${isOpen ? 'Open' : 'Closed'})'),
             ),
             offset: Offset(
-              context.knobs.sliderInt(label: 'X Offset', initial: 0, min: -100, max: 100).toDouble(),
-              context.knobs.sliderInt(label: 'Y Offset', initial: 0, min: -100, max: 100).toDouble(),
+              context.knobs
+                  .sliderInt(label: 'X Offset', initial: 0, min: -100, max: 100)
+                  .toDouble(),
+              context.knobs
+                  .sliderInt(label: 'Y Offset', initial: 0, min: -100, max: 100)
+                  .toDouble(),
             ),
             anchor: context.knobs.options(
                 label: 'Anchor',
                 description: 'The anchor for the content dropdown.',
                 initial: DropdownAnchor.bottomLeft,
-                options: DropdownAnchor.values.map((v) => Option(label: v.name, value: v)).toList()),
+                options: DropdownAnchor.values
+                    .map((v) => Option(label: v.name, value: v))
+                    .toList()),
             direction: context.knobs.options(
                 label: 'Direction',
                 description: 'The direction where the dropdown should open to.',
                 initial: DropdownDirection.downRight,
-                options: DropdownDirection.values.map((v) => Option(label: v.name, value: v)).toList()),
+                options: DropdownDirection.values
+                    .map((v) => Option(label: v.name, value: v))
+                    .toList()),
             closeOnOutsideTap: context.knobs.boolean(
                 label: 'Close On Outside Tap',
-                description: 'Whether the content is closed on an outside tap or only if the content calls close().',
+                description:
+                    'Whether the content is closed on an outside tap or only if the content calls close().',
                 initial: true),
           ));
     });
@@ -142,26 +154,37 @@ Story _openDropdown() => Story(
             toggleBuilder: (context, isOpen) => Container(
               height: 120,
               width: 120,
-              color: isOpen ? Colors.amber.withOpacity(.25) : Colors.blue.withOpacity(.25),
+              color: isOpen
+                  ? Colors.amber.withOpacity(.25)
+                  : Colors.blue.withOpacity(.25),
               child: Text('Toggle (${isOpen ? 'Open' : 'Closed'})'),
             ),
             offset: Offset(
-              context.knobs.sliderInt(label: 'X Offset', initial: 0, min: -100, max: 100).toDouble(),
-              context.knobs.sliderInt(label: 'Y Offset', initial: 0, min: -100, max: 100).toDouble(),
+              context.knobs
+                  .sliderInt(label: 'X Offset', initial: 0, min: -100, max: 100)
+                  .toDouble(),
+              context.knobs
+                  .sliderInt(label: 'Y Offset', initial: 0, min: -100, max: 100)
+                  .toDouble(),
             ),
             anchor: context.knobs.options(
                 label: 'Anchor',
                 description: 'The anchor for the content dropdown.',
                 initial: DropdownAnchor.bottomLeft,
-                options: DropdownAnchor.values.map((v) => Option(label: v.name, value: v)).toList()),
+                options: DropdownAnchor.values
+                    .map((v) => Option(label: v.name, value: v))
+                    .toList()),
             direction: context.knobs.options(
                 label: 'Direction',
                 description: 'The direction where the dropdown should open to.',
                 initial: DropdownDirection.downRight,
-                options: DropdownDirection.values.map((v) => Option(label: v.name, value: v)).toList()),
+                options: DropdownDirection.values
+                    .map((v) => Option(label: v.name, value: v))
+                    .toList()),
             closeOnOutsideTap: context.knobs.boolean(
                 label: 'Close On Outside Tap',
-                description: 'Whether the content is closed on an outside tap or only if the content calls close().',
+                description:
+                    'Whether the content is closed on an outside tap or only if the content calls close().',
                 initial: true),
           ));
     });

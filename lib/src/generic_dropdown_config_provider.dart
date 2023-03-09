@@ -18,11 +18,13 @@ class GenericDropdownConfigProvider extends InheritedWidget {
   /// of the content overlay to the toggle.
   final GlobalKey? rootScreenKey;
 
-  const GenericDropdownConfigProvider({super.key, this.rootScreenKey, required super.child});
+  const GenericDropdownConfigProvider(
+      {super.key, this.rootScreenKey, required super.child});
 
   @override
-  bool updateShouldNotify(GenericDropdownConfigProvider oldWidget) => rootScreenKey != oldWidget.rootScreenKey;
+  bool updateShouldNotify(GenericDropdownConfigProvider oldWidget) =>
+      rootScreenKey != oldWidget.rootScreenKey;
 
-  static GenericDropdownConfigProvider? of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<GenericDropdownConfigProvider>();
+  static GenericDropdownConfigProvider? of(BuildContext context) => context
+      .dependOnInheritedWidgetOfExactType<GenericDropdownConfigProvider>();
 }

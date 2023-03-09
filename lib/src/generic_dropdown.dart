@@ -44,7 +44,8 @@ enum DropdownDirection {
   downRight,
 }
 
-typedef ContentBuilder = Widget Function(BuildContext context, VoidCallback repaint, VoidCallback close);
+typedef ContentBuilder = Widget Function(
+    BuildContext context, VoidCallback repaint, VoidCallback close);
 typedef ToggleBuilder = Widget Function(BuildContext context, bool isOpen);
 
 /// A generic dropdown widget that enables arbitrary content
@@ -130,7 +131,10 @@ class _GenericDropdownState extends State<GenericDropdown> {
   }
 
   RenderBox? _ancestor(BuildContext context) =>
-      GenericDropdownConfigProvider.of(context)?.rootScreenKey?.currentContext?.findRenderObject() as RenderBox?;
+      GenericDropdownConfigProvider.of(context)
+          ?.rootScreenKey
+          ?.currentContext
+          ?.findRenderObject() as RenderBox?;
 
   void _close() {
     _overlayEntry?.remove();
@@ -142,7 +146,8 @@ class _GenericDropdownState extends State<GenericDropdown> {
     final renderBox = context.findRenderObject() as RenderBox;
 
     final size = renderBox.size;
-    final togglePosition = renderBox.localToGlobal(Offset.zero, ancestor: _ancestor(context));
+    final togglePosition =
+        renderBox.localToGlobal(Offset.zero, ancestor: _ancestor(context));
 
     final screenSize = _screenSize(context);
 
@@ -166,61 +171,93 @@ class _GenericDropdownState extends State<GenericDropdown> {
     double? top, left, bottom, right;
 
     // Anchor TOP LEFT
-    if (widget.anchor == DropdownAnchor.topLeft && widget.direction == DropdownDirection.upLeft) {
+    if (widget.anchor == DropdownAnchor.topLeft &&
+        widget.direction == DropdownDirection.upLeft) {
       bottom = screenSize.height - togglePosition.dy + widget.offset.dy;
       right = screenSize.width - togglePosition.dx + widget.offset.dx;
-    } else if (widget.anchor == DropdownAnchor.topLeft && widget.direction == DropdownDirection.upRight) {
+    } else if (widget.anchor == DropdownAnchor.topLeft &&
+        widget.direction == DropdownDirection.upRight) {
       bottom = screenSize.height - togglePosition.dy + widget.offset.dy;
       left = togglePosition.dx + widget.offset.dx;
-    } else if (widget.anchor == DropdownAnchor.topLeft && widget.direction == DropdownDirection.downLeft) {
+    } else if (widget.anchor == DropdownAnchor.topLeft &&
+        widget.direction == DropdownDirection.downLeft) {
       top = togglePosition.dy + widget.offset.dy;
       right = screenSize.width - togglePosition.dx + widget.offset.dx;
-    } else if (widget.anchor == DropdownAnchor.topLeft && widget.direction == DropdownDirection.downRight) {
+    } else if (widget.anchor == DropdownAnchor.topLeft &&
+        widget.direction == DropdownDirection.downRight) {
       top = togglePosition.dy + widget.offset.dy;
       left = togglePosition.dx + widget.offset.dx;
     }
 
     // Anchor TOP RIGHT
-    if (widget.anchor == DropdownAnchor.topRight && widget.direction == DropdownDirection.upLeft) {
+    if (widget.anchor == DropdownAnchor.topRight &&
+        widget.direction == DropdownDirection.upLeft) {
       bottom = screenSize.height - togglePosition.dy + widget.offset.dy;
-      right = screenSize.width - togglePosition.dx + widget.offset.dx - size.width;
-    } else if (widget.anchor == DropdownAnchor.topRight && widget.direction == DropdownDirection.upRight) {
+      right =
+          screenSize.width - togglePosition.dx + widget.offset.dx - size.width;
+    } else if (widget.anchor == DropdownAnchor.topRight &&
+        widget.direction == DropdownDirection.upRight) {
       bottom = screenSize.height - togglePosition.dy + widget.offset.dy;
       left = togglePosition.dx + widget.offset.dx + size.width;
-    } else if (widget.anchor == DropdownAnchor.topRight && widget.direction == DropdownDirection.downLeft) {
+    } else if (widget.anchor == DropdownAnchor.topRight &&
+        widget.direction == DropdownDirection.downLeft) {
       top = togglePosition.dy + widget.offset.dy;
-      right = screenSize.width - togglePosition.dx + widget.offset.dx - size.width;
-    } else if (widget.anchor == DropdownAnchor.topRight && widget.direction == DropdownDirection.downRight) {
+      right =
+          screenSize.width - togglePosition.dx + widget.offset.dx - size.width;
+    } else if (widget.anchor == DropdownAnchor.topRight &&
+        widget.direction == DropdownDirection.downRight) {
       top = togglePosition.dy + widget.offset.dy;
       left = togglePosition.dx + widget.offset.dx + size.width;
     }
 
     // Anchor BOTTOM LEFT
-    if (widget.anchor == DropdownAnchor.bottomLeft && widget.direction == DropdownDirection.upLeft) {
-      bottom = screenSize.height - togglePosition.dy + widget.offset.dy - size.height;
+    if (widget.anchor == DropdownAnchor.bottomLeft &&
+        widget.direction == DropdownDirection.upLeft) {
+      bottom = screenSize.height -
+          togglePosition.dy +
+          widget.offset.dy -
+          size.height;
       right = screenSize.width - togglePosition.dx + widget.offset.dx;
-    } else if (widget.anchor == DropdownAnchor.bottomLeft && widget.direction == DropdownDirection.upRight) {
-      bottom = screenSize.height - togglePosition.dy + widget.offset.dy - size.height;
+    } else if (widget.anchor == DropdownAnchor.bottomLeft &&
+        widget.direction == DropdownDirection.upRight) {
+      bottom = screenSize.height -
+          togglePosition.dy +
+          widget.offset.dy -
+          size.height;
       left = togglePosition.dx + widget.offset.dx;
-    } else if (widget.anchor == DropdownAnchor.bottomLeft && widget.direction == DropdownDirection.downLeft) {
+    } else if (widget.anchor == DropdownAnchor.bottomLeft &&
+        widget.direction == DropdownDirection.downLeft) {
       top = togglePosition.dy + widget.offset.dy + size.height;
       right = screenSize.width - togglePosition.dx + widget.offset.dx;
-    } else if (widget.anchor == DropdownAnchor.bottomLeft && widget.direction == DropdownDirection.downRight) {
+    } else if (widget.anchor == DropdownAnchor.bottomLeft &&
+        widget.direction == DropdownDirection.downRight) {
       top = togglePosition.dy + widget.offset.dy + size.height;
       left = togglePosition.dx + widget.offset.dx;
     }
 
     // Anchor BOTTOM RIGHT
-    if (widget.anchor == DropdownAnchor.bottomRight && widget.direction == DropdownDirection.upLeft) {
-      bottom = screenSize.height - togglePosition.dy + widget.offset.dy - size.height;
-      right = screenSize.width - togglePosition.dx + widget.offset.dx - size.width;
-    } else if (widget.anchor == DropdownAnchor.bottomRight && widget.direction == DropdownDirection.upRight) {
-      bottom = screenSize.height - togglePosition.dy + widget.offset.dy - size.height;
+    if (widget.anchor == DropdownAnchor.bottomRight &&
+        widget.direction == DropdownDirection.upLeft) {
+      bottom = screenSize.height -
+          togglePosition.dy +
+          widget.offset.dy -
+          size.height;
+      right =
+          screenSize.width - togglePosition.dx + widget.offset.dx - size.width;
+    } else if (widget.anchor == DropdownAnchor.bottomRight &&
+        widget.direction == DropdownDirection.upRight) {
+      bottom = screenSize.height -
+          togglePosition.dy +
+          widget.offset.dy -
+          size.height;
       left = togglePosition.dx + widget.offset.dx + size.width;
-    } else if (widget.anchor == DropdownAnchor.bottomRight && widget.direction == DropdownDirection.downLeft) {
+    } else if (widget.anchor == DropdownAnchor.bottomRight &&
+        widget.direction == DropdownDirection.downLeft) {
       top = togglePosition.dy + widget.offset.dy + size.height;
-      right = screenSize.width - togglePosition.dx + widget.offset.dx - size.width;
-    } else if (widget.anchor == DropdownAnchor.bottomRight && widget.direction == DropdownDirection.downRight) {
+      right =
+          screenSize.width - togglePosition.dx + widget.offset.dx - size.width;
+    } else if (widget.anchor == DropdownAnchor.bottomRight &&
+        widget.direction == DropdownDirection.downRight) {
       top = togglePosition.dy + widget.offset.dy + size.height;
       left = togglePosition.dx + widget.offset.dx + size.width;
     }
@@ -249,8 +286,8 @@ class _GenericDropdownState extends State<GenericDropdown> {
                       // content.
                     },
                     child: StatefulBuilder(
-                        builder: (context, setState) =>
-                            widget.contentBuilder.call(context, () => setState(() {}), _close)),
+                        builder: (context, setState) => widget.contentBuilder
+                            .call(context, () => setState(() {}), _close)),
                   ),
                 ),
               ],
@@ -265,7 +302,8 @@ class _GenericDropdownState extends State<GenericDropdown> {
     setState(() => _isOpen = true);
   }
 
-  Size _screenSize(BuildContext context) => _ancestor(context)?.size ?? MediaQuery.of(context).size;
+  Size _screenSize(BuildContext context) =>
+      _ancestor(context)?.size ?? MediaQuery.of(context).size;
 
   @override
   Widget build(BuildContext context) => Row(
