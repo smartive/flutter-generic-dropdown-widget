@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:generic_dropdown_widget/src/generic_dropdown.dart';
 
-Widget _wrapper(Widget child) => MaterialApp(home: Scaffold(body: SafeArea(child: Center(child: child))));
+Widget _wrapper(Widget child) =>
+    MaterialApp(home: Scaffold(body: SafeArea(child: Center(child: child))));
 
 class _PlacementCase {
   final DropdownAnchor anchor;
@@ -15,17 +16,17 @@ class _PlacementCase {
     required this.translation,
   });
 
-  Offset bottomLeft(Rect toggle, Rect content) =>
-      _anchor(toggle).translate(content.width * translation[2][0], content.height * translation[2][1]);
+  Offset bottomLeft(Rect toggle, Rect content) => _anchor(toggle).translate(
+      content.width * translation[2][0], content.height * translation[2][1]);
 
-  Offset bottomRight(Rect toggle, Rect content) =>
-      _anchor(toggle).translate(content.width * translation[3][0], content.height * translation[3][1]);
+  Offset bottomRight(Rect toggle, Rect content) => _anchor(toggle).translate(
+      content.width * translation[3][0], content.height * translation[3][1]);
 
-  Offset topLeft(Rect toggle, Rect content) =>
-      _anchor(toggle).translate(content.width * translation[0][0], content.height * translation[0][1]);
+  Offset topLeft(Rect toggle, Rect content) => _anchor(toggle).translate(
+      content.width * translation[0][0], content.height * translation[0][1]);
 
-  Offset topRight(Rect toggle, Rect content) =>
-      _anchor(toggle).translate(content.width * translation[1][0], content.height * translation[1][1]);
+  Offset topRight(Rect toggle, Rect content) => _anchor(toggle).translate(
+      content.width * translation[1][0], content.height * translation[1][1]);
 
   Offset _anchor(Rect toggle) {
     switch (anchor) {
@@ -140,7 +141,8 @@ void main() {
       expect(find.byKey(contentKey), findsNothing);
     });
 
-    testWidgets('should render content when "openOnRender" is "true".', (tester) async {
+    testWidgets('should render content when "openOnRender" is "true".',
+        (tester) async {
       const toggleKey = Key('toggle');
       const contentKey = Key('content');
 
@@ -165,7 +167,8 @@ void main() {
       expect(find.byKey(contentKey), findsOneWidget);
     });
 
-    testWidgets('should not close content when "closeOnOutsideTap" is "false".', (tester) async {
+    testWidgets('should not close content when "closeOnOutsideTap" is "false".',
+        (tester) async {
       const toggleKey = Key('toggle');
       const contentKey = Key('content');
 
@@ -213,7 +216,10 @@ void main() {
             height: 50,
             width: 200,
             color: Colors.blue,
-            child: TextButton(onPressed: close, key: closeButtonKey, child: const Text('Close'))),
+            child: TextButton(
+                onPressed: close,
+                key: closeButtonKey,
+                child: const Text('Close'))),
       )));
       await tester.pumpAndSettle();
 
@@ -464,10 +470,16 @@ void main() {
           final toggleRect = tester.getRect(find.byKey(toggleKey));
           final contentRect = tester.getRect(find.byKey(contentKey));
 
-          expect(contentRect.topLeft, testCase.topLeft(toggleRect, contentRect), reason: 'topLeft mismatch');
-          expect(contentRect.topRight, testCase.topRight(toggleRect, contentRect), reason: 'topRight mismatch');
-          expect(contentRect.bottomLeft, testCase.bottomLeft(toggleRect, contentRect), reason: 'bottomLeft mismatch');
-          expect(contentRect.bottomRight, testCase.bottomRight(toggleRect, contentRect),
+          expect(contentRect.topLeft, testCase.topLeft(toggleRect, contentRect),
+              reason: 'topLeft mismatch');
+          expect(
+              contentRect.topRight, testCase.topRight(toggleRect, contentRect),
+              reason: 'topRight mismatch');
+          expect(contentRect.bottomLeft,
+              testCase.bottomLeft(toggleRect, contentRect),
+              reason: 'bottomLeft mismatch');
+          expect(contentRect.bottomRight,
+              testCase.bottomRight(toggleRect, contentRect),
               reason: 'bottomRight mismatch');
         });
       }
