@@ -8,7 +8,7 @@ as the toggle button and the content within the dropdown.
 
 Head over to the [storybook](https://smartive.github.io/flutter-generic-dropdown-widget/)
 to see it in action. (Much love to
-(storybook_flutter)[https://github.com/ookami-kb/storybook_flutter] at this point!)
+[storybook_flutter](https://github.com/ookami-kb/storybook_flutter) at this point!)
 
 ## Usage
 
