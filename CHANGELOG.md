@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/smartive/flutter-generic-dropdown-widget/compare/v1.0.0...v1.0.1) (2023-03-09)
+
+
+### Bug Fixes
+
+* **code style:** use formatter and examples ([#2](https://github.com/smartive/flutter-generic-dropdown-widget/issues/2)) ([8e32070](https://github.com/smartive/flutter-generic-dropdown-widget/commit/8e32070830cdf657d0476c9c7482d4ee2a18492d))
+
 # 1.0.0 (2023-03-08)
 
 
