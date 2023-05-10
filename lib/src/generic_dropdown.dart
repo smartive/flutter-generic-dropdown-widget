@@ -61,12 +61,12 @@ enum DropdownDirection {
   upRight,
 
   /// The content will be positioned with the top
-  /// right edge to the [DropdownAnchor] and opens to the bottom left.
-  downLeft,
-
-  /// The content will be positioned with the top
   /// left edge to the [DropdownAnchor] and opens to the bottom right.
   downRight,
+
+  /// The content will be positioned with the top
+  /// right edge to the [DropdownAnchor] and opens to the bottom left.
+  downLeft,
 }
 
 /// A generic dropdown widget that enables arbitrary content
