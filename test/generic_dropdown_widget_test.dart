@@ -2,46 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:generic_dropdown_widget/src/generic_dropdown.dart';
 
-Widget _wrapper(Widget child) =>
-    MaterialApp(home: Scaffold(body: SafeArea(child: Center(child: child))));
-
-class _PlacementCase {
-  final DropdownAnchor anchor;
-  final DropdownDirection direction;
-  final List<List<int>> translation;
-
-  const _PlacementCase(
-    this.anchor,
-    this.direction, {
-    required this.translation,
-  });
-
-  Offset bottomLeft(Rect toggle, Rect content) => _anchor(toggle).translate(
-      content.width * translation[2][0], content.height * translation[2][1]);
-
-  Offset bottomRight(Rect toggle, Rect content) => _anchor(toggle).translate(
-      content.width * translation[3][0], content.height * translation[3][1]);
-
-  Offset topLeft(Rect toggle, Rect content) => _anchor(toggle).translate(
-      content.width * translation[0][0], content.height * translation[0][1]);
-
-  Offset topRight(Rect toggle, Rect content) => _anchor(toggle).translate(
-      content.width * translation[1][0], content.height * translation[1][1]);
-
-  Offset _anchor(Rect toggle) {
-    switch (anchor) {
-      case DropdownAnchor.topLeft:
-        return toggle.topLeft;
-      case DropdownAnchor.topRight:
-        return toggle.topRight;
-      case DropdownAnchor.bottomLeft:
-        return toggle.bottomLeft;
-      case DropdownAnchor.bottomRight:
-        return toggle.bottomRight;
-    }
-  }
-}
-
 void main() {
   group('GenericDropdown -', () {
     testWidgets('should render the toggle.', (tester) async {
@@ -320,6 +280,46 @@ void main() {
           ],
         ),
         const _PlacementCase(
+          DropdownAnchor.topCenter,
+          DropdownDirection.upLeft,
+          translation: [
+            [-1, -1],
+            [0, -1],
+            [-1, 0],
+            [0, 0],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.topCenter,
+          DropdownDirection.upRight,
+          translation: [
+            [0, -1],
+            [1, -1],
+            [0, 0],
+            [1, 0],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.topCenter,
+          DropdownDirection.downLeft,
+          translation: [
+            [-1, 0],
+            [0, 0],
+            [-1, 1],
+            [0, 1],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.topCenter,
+          DropdownDirection.downRight,
+          translation: [
+            [0, 0],
+            [1, 0],
+            [0, 1],
+            [1, 1],
+          ],
+        ),
+        const _PlacementCase(
           DropdownAnchor.topRight,
           DropdownDirection.upLeft,
           translation: [
@@ -360,6 +360,126 @@ void main() {
           ],
         ),
         const _PlacementCase(
+          DropdownAnchor.leftCenter,
+          DropdownDirection.upLeft,
+          translation: [
+            [-1, -1],
+            [0, -1],
+            [-1, 0],
+            [0, 0],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.leftCenter,
+          DropdownDirection.upRight,
+          translation: [
+            [0, -1],
+            [1, -1],
+            [0, 0],
+            [1, 0],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.leftCenter,
+          DropdownDirection.downLeft,
+          translation: [
+            [-1, 0],
+            [0, 0],
+            [-1, 1],
+            [0, 1],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.leftCenter,
+          DropdownDirection.downRight,
+          translation: [
+            [0, 0],
+            [1, 0],
+            [0, 1],
+            [1, 1],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.center,
+          DropdownDirection.upLeft,
+          translation: [
+            [-1, -1],
+            [0, -1],
+            [-1, 0],
+            [0, 0],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.center,
+          DropdownDirection.upRight,
+          translation: [
+            [0, -1],
+            [1, -1],
+            [0, 0],
+            [1, 0],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.center,
+          DropdownDirection.downLeft,
+          translation: [
+            [-1, 0],
+            [0, 0],
+            [-1, 1],
+            [0, 1],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.center,
+          DropdownDirection.downRight,
+          translation: [
+            [0, 0],
+            [1, 0],
+            [0, 1],
+            [1, 1],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.rightCenter,
+          DropdownDirection.upLeft,
+          translation: [
+            [-1, -1],
+            [0, -1],
+            [-1, 0],
+            [0, 0],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.rightCenter,
+          DropdownDirection.upRight,
+          translation: [
+            [0, -1],
+            [1, -1],
+            [0, 0],
+            [1, 0],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.rightCenter,
+          DropdownDirection.downLeft,
+          translation: [
+            [-1, 0],
+            [0, 0],
+            [-1, 1],
+            [0, 1],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.rightCenter,
+          DropdownDirection.downRight,
+          translation: [
+            [0, 0],
+            [1, 0],
+            [0, 1],
+            [1, 1],
+          ],
+        ),
+        const _PlacementCase(
           DropdownAnchor.bottomLeft,
           DropdownDirection.upLeft,
           translation: [
@@ -391,6 +511,46 @@ void main() {
         ),
         const _PlacementCase(
           DropdownAnchor.bottomLeft,
+          DropdownDirection.downRight,
+          translation: [
+            [0, 0],
+            [1, 0],
+            [0, 1],
+            [1, 1],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.bottomCenter,
+          DropdownDirection.upLeft,
+          translation: [
+            [-1, -1],
+            [0, -1],
+            [-1, 0],
+            [0, 0],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.bottomCenter,
+          DropdownDirection.upRight,
+          translation: [
+            [0, -1],
+            [1, -1],
+            [0, 0],
+            [1, 0],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.bottomCenter,
+          DropdownDirection.downLeft,
+          translation: [
+            [-1, 0],
+            [0, 0],
+            [-1, 1],
+            [0, 1],
+          ],
+        ),
+        const _PlacementCase(
+          DropdownAnchor.bottomCenter,
           DropdownDirection.downRight,
           translation: [
             [0, 0],
@@ -485,4 +645,54 @@ void main() {
       }
     });
   });
+}
+
+Widget _wrapper(Widget child) =>
+    MaterialApp(home: Scaffold(body: SafeArea(child: Center(child: child))));
+
+class _PlacementCase {
+  final DropdownAnchor anchor;
+  final DropdownDirection direction;
+  final List<List<int>> translation;
+
+  const _PlacementCase(
+    this.anchor,
+    this.direction, {
+    required this.translation,
+  });
+
+  Offset bottomLeft(Rect toggle, Rect content) => _anchor(toggle).translate(
+      content.width * translation[2][0], content.height * translation[2][1]);
+
+  Offset bottomRight(Rect toggle, Rect content) => _anchor(toggle).translate(
+      content.width * translation[3][0], content.height * translation[3][1]);
+
+  Offset topLeft(Rect toggle, Rect content) => _anchor(toggle).translate(
+      content.width * translation[0][0], content.height * translation[0][1]);
+
+  Offset topRight(Rect toggle, Rect content) => _anchor(toggle).translate(
+      content.width * translation[1][0], content.height * translation[1][1]);
+
+  Offset _anchor(Rect toggle) {
+    switch (anchor) {
+      case DropdownAnchor.topLeft:
+        return toggle.topLeft;
+      case DropdownAnchor.topCenter:
+        return toggle.topCenter;
+      case DropdownAnchor.topRight:
+        return toggle.topRight;
+      case DropdownAnchor.leftCenter:
+        return toggle.centerLeft;
+      case DropdownAnchor.center:
+        return toggle.center;
+      case DropdownAnchor.rightCenter:
+        return toggle.centerRight;
+      case DropdownAnchor.bottomLeft:
+        return toggle.bottomLeft;
+      case DropdownAnchor.bottomCenter:
+        return toggle.bottomCenter;
+      case DropdownAnchor.bottomRight:
+        return toggle.bottomRight;
+    }
+  }
 }
