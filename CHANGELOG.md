@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/smartive/flutter-generic-dropdown-widget/compare/v1.0.1...v1.1.0) (2023-05-11)
+
+
+### Features
+
+* add more anchor options ([#6](https://github.com/smartive/flutter-generic-dropdown-widget/issues/6)) ([d4e756c](https://github.com/smartive/flutter-generic-dropdown-widget/commit/d4e756c0056ffecd855df4c3270be54912858ba6))
+
 ## [1.0.1](https://github.com/smartive/flutter-generic-dropdown-widget/compare/v1.0.0...v1.0.1) (2023-03-09)
 
 
