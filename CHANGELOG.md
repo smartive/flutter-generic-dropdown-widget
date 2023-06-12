@@ -1,3 +1,17 @@
+# [2.0.0](https://github.com/smartive/flutter-generic-dropdown-widget/compare/v1.1.0...v2.0.0) (2023-06-12)
+
+
+### Features
+
+* update to sdk version 3 ([#7](https://github.com/smartive/flutter-generic-dropdown-widget/issues/7)) ([b62ff8c](https://github.com/smartive/flutter-generic-dropdown-widget/commit/b62ff8cedc3659380d7b630462a254cd95a49227))
+
+
+### BREAKING CHANGES
+
+* This removes Flutter 2.x
+support. Users of the package need to update to
+Flutter 3.x SDK versions to further use the package.
+
 # [1.1.0](https://github.com/smartive/flutter-generic-dropdown-widget/compare/v1.0.1...v1.1.0) (2023-05-11)
 
 
