@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:generic_dropdown_widget/generic_dropdown_widget.dart';
 
-class Dropdown extends StatelessWidget {
+final class Dropdown extends StatelessWidget {
   const Dropdown({super.key});
 
   @override

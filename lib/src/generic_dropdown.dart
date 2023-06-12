@@ -78,7 +78,7 @@ enum DropdownDirection {
 /// content. The [contentBuilder] receives a "repaint" and a
 /// "close" callbacks, which can help updating the content
 /// or closing the content entirely.
-class GenericDropdown extends StatefulWidget {
+final class GenericDropdown extends StatefulWidget {
   /// The anchor of the dropdown. Defines
   /// on which point of the toggle the content
   /// will be anchored. Defaults to [DropdownAnchor.bottomLeft].
@@ -132,7 +132,7 @@ class GenericDropdown extends StatefulWidget {
   State<GenericDropdown> createState() => _GenericDropdownState();
 }
 
-class _GenericDropdownState extends State<GenericDropdown> {
+final class _GenericDropdownState extends State<GenericDropdown> {
   var _isOpen = false;
   OverlayEntry? _overlayEntry;
 
