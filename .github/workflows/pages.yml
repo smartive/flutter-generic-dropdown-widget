@@ -34,7 +34,7 @@ jobs:
         run: flutter build web --base-href /flutter-generic-dropdown-widget/
         working-directory: storybook
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: storybook/build/web
       - name: Deploy to GitHub Pages
