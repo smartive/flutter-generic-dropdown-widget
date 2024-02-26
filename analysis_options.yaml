@@ -16,3 +16,4 @@ linter:
 analyzer:
   exclude:
     - storybook/
+    - example/
