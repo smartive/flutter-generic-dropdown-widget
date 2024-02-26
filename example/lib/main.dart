@@ -30,7 +30,8 @@ final class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Generic Dropdown Test'),
       ),
-      body: const Center(
+      body: const Align(
+        alignment: Alignment.center,
         child: Dropdown(),
       ),
     );
