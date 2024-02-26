@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/smartive/flutter-generic-dropdown-widget/compare/v2.0.0...v2.0.1) (2024-02-26)
+
+
+### Bug Fixes
+
+* reposition on screen out-of-bounds ([#16](https://github.com/smartive/flutter-generic-dropdown-widget/issues/16)) ([3b76e90](https://github.com/smartive/flutter-generic-dropdown-widget/commit/3b76e900e6b541d07626d7976570933eef58eb47))
+
 # [2.0.0](https://github.com/smartive/flutter-generic-dropdown-widget/compare/v1.1.0...v2.0.0) (2023-06-12)
 
 
