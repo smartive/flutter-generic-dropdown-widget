@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/smartive/flutter-generic-dropdown-widget/compare/v2.0.1...v2.1.0) (2024-02-26)
+
+
+### Features
+
+* add configurable barrier (backdrop) color ([#17](https://github.com/smartive/flutter-generic-dropdown-widget/issues/17)) ([0b9b4b9](https://github.com/smartive/flutter-generic-dropdown-widget/commit/0b9b4b9962cbe457417af7b51d7cfe0325f23ea9))
+
 ## [2.0.1](https://github.com/smartive/flutter-generic-dropdown-widget/compare/v2.0.0...v2.0.1) (2024-02-26)
 
 
