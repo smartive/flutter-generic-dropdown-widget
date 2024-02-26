@@ -119,6 +119,11 @@ final class GenericDropdown extends StatefulWidget {
   /// you need to ensure that the mouse events are passed to the dropdown.
   final ToggleBuilder toggleBuilder;
 
+  /// The color of the barrier that is shown when the dropdown is open.
+  /// Defaults to `Colors.transparent`.
+  /// This spans the entire screen.
+  final Color barrierColor;
+
   const GenericDropdown(
       {super.key,
       required this.contentBuilder,
@@ -127,6 +132,7 @@ final class GenericDropdown extends StatefulWidget {
       required this.toggleBuilder,
       this.closeOnOutsideTap = true,
       this.openOnRender = false,
+      this.barrierColor = Colors.transparent,
       this.offset = Offset.zero});
 
   @override
@@ -445,7 +451,7 @@ final class _GenericDropdownState extends State<GenericDropdown> {
           onTap: () => widget.closeOnOutsideTap ? _close() : null,
           child: Container(
             alignment: Alignment.topLeft,
-            color: Colors.transparent,
+            color: widget.barrierColor,
             child: Stack(
               children: [
                 StatefulBuilder(builder: (context, setState) {

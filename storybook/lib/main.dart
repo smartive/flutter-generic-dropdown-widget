@@ -103,6 +103,18 @@ Story _dropdown() => Story(
                 description:
                     'Whether the content is closed on an outside tap or only if the content calls close().',
                 initial: true),
+            barrierColor: context.knobs.options(
+              label: 'Barrier Color',
+              description: 'The color of the barrier behind the dropdown.',
+              initial: Colors.transparent,
+              options: [
+                Option(label: 'Transparent', value: Colors.transparent),
+                Option(label: 'Black', value: Colors.black.withOpacity(.5)),
+                Option(label: 'Red', value: Colors.red.withOpacity(.5)),
+                Option(label: 'Green', value: Colors.green.withOpacity(.5)),
+                Option(label: 'Blue', value: Colors.blue.withOpacity(.5)),
+              ],
+            ),
           ));
     });
 
