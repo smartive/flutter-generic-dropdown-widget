@@ -470,9 +470,9 @@ final class _GenericDropdownState extends State<GenericDropdown> {
                       right = screenSize.width - contentSize!.width;
                     }
 
-                    final isWiderThanScreen = contentSize != null &&
+                    final isWiderThanScreen =
                         contentSize!.width > screenSize.width;
-                    final isTallerThanScreen = contentSize != null &&
+                    final isTallerThanScreen =
                         contentSize!.height > screenSize.height;
 
                     if (isWiderThanScreen) {
