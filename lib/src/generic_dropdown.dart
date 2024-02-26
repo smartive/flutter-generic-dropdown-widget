@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import './generic_dropdown_config_provider.dart';
 
@@ -435,6 +436,7 @@ final class _GenericDropdownState extends State<GenericDropdown> {
       }
     }
 
+    Size? contentSize;
     _overlayEntry = OverlayEntry(
       maintainState: true,
       builder: (context) => Material(
@@ -446,23 +448,66 @@ final class _GenericDropdownState extends State<GenericDropdown> {
             color: Colors.transparent,
             child: Stack(
               children: [
-                Positioned(
-                  top: top,
-                  left: left,
-                  bottom: bottom,
-                  right: right,
-                  child: GestureDetector(
-                    onTap: () {
-                      // this gesture detector prevents
-                      // the bubbling event that closes the
-                      // content on a click inside the
-                      // content.
-                    },
-                    child: StatefulBuilder(
-                        builder: (context, setState) => widget.contentBuilder
-                            .call(context, () => setState(() {}), _close)),
-                  ),
-                ),
+                StatefulBuilder(builder: (context, setState) {
+                  if (contentSize != null) {
+                    if (top != null &&
+                        top! + contentSize!.height > screenSize.height) {
+                      top = screenSize.height - contentSize!.height;
+                    }
+
+                    if (bottom != null &&
+                        bottom! + contentSize!.height > screenSize.height) {
+                      bottom = screenSize.height - contentSize!.height;
+                    }
+
+                    if (left != null &&
+                        left! + contentSize!.width > screenSize.width) {
+                      left = screenSize.width - contentSize!.width;
+                    }
+
+                    if (right != null &&
+                        right! + contentSize!.width > screenSize.width) {
+                      right = screenSize.width - contentSize!.width;
+                    }
+
+                    final isWiderThanScreen =
+                        contentSize!.width > screenSize.width;
+                    final isTallerThanScreen =
+                        contentSize!.height > screenSize.height;
+
+                    if (isWiderThanScreen) {
+                      left = 0;
+                      right = 0;
+                    }
+
+                    if (isTallerThanScreen) {
+                      top = 0;
+                      bottom = 0;
+                    }
+                  }
+
+                  return Positioned(
+                    top: top,
+                    left: left,
+                    bottom: bottom,
+                    right: right,
+                    child: GestureDetector(
+                      onTap: () {
+                        // this gesture detector prevents
+                        // the bubbling event that closes the
+                        // content on a click inside the
+                        // content.
+                      },
+                      child: _MeasureSize(
+                        onChange: (size) => setState(() => contentSize = size),
+                        child: StatefulBuilder(
+                            builder: (context, setState) => widget
+                                .contentBuilder
+                                .call(context, () => setState(() {}), _close)),
+                      ),
+                    ),
+                  );
+                }),
               ],
             ),
           ),
@@ -477,4 +522,38 @@ final class _GenericDropdownState extends State<GenericDropdown> {
 
   Size _screenSize(BuildContext context) =>
       _ancestor(context)?.size ?? MediaQuery.of(context).size;
+}
+
+final class _MeasureSizeRenderObject extends RenderProxyBox {
+  Size? _oldSize;
+
+  final void Function(Size size) onChange;
+
+  _MeasureSizeRenderObject(this.onChange);
+
+  @override
+  void performLayout() {
+    super.performLayout();
+
+    final newSize = child?.size;
+    if (_oldSize == newSize || newSize == null) {
+      return;
+    }
+
+    _oldSize = newSize;
+    WidgetsBinding.instance.addPostFrameCallback((_) => onChange(newSize));
+  }
+}
+
+class _MeasureSize extends SingleChildRenderObjectWidget {
+  final void Function(Size size) onChange;
+
+  const _MeasureSize({
+    super.child,
+    required this.onChange,
+  });
+
+  @override
+  RenderObject createRenderObject(BuildContext context) =>
+      _MeasureSizeRenderObject(onChange);
 }
