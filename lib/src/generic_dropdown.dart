@@ -449,8 +449,6 @@ final class _GenericDropdownState extends State<GenericDropdown> {
             child: Stack(
               children: [
                 StatefulBuilder(builder: (context, setState) {
-                  print(contentSize);
-
                   if (contentSize != null) {
                     if (top != null &&
                         top! + contentSize!.height > screenSize.height) {
@@ -471,9 +469,22 @@ final class _GenericDropdownState extends State<GenericDropdown> {
                         right! + contentSize!.width > screenSize.width) {
                       right = screenSize.width - contentSize!.width;
                     }
+
+                    final isWiderThanScreen = contentSize != null &&
+                        contentSize!.width > screenSize.width;
+                    final isTallerThanScreen = contentSize != null &&
+                        contentSize!.height > screenSize.height;
+
+                    if (isWiderThanScreen) {
+                      left = 0;
+                      right = 0;
+                    }
+
+                    if (isTallerThanScreen) {
+                      top = 0;
+                      bottom = 0;
+                    }
                   }
-                  print(
-                      'top: $top, bottom: $bottom, left: $left, right: $right');
 
                   return Positioned(
                     top: top,
