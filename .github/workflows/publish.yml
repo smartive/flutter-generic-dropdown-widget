@@ -19,7 +19,7 @@ jobs:
       # Last release whose notes are committed in CHANGELOG.md; newer notes come from GitHub releases.
       LAST_COMMITTED_CHANGELOG_TAG: v2.1.0
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
