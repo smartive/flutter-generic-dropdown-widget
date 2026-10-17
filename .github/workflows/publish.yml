@@ -1,0 +1,38 @@
+name: Publish to pub.dev
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # pub.dev automated publishing via OIDC
+
+jobs:
+  publish:
+    name: Publish
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Last release whose notes are committed in CHANGELOG.md; newer notes come from GitHub releases.
+      LAST_COMMITTED_CHANGELOG_TAG: v2.1.0
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - name: Set version from tag
+        run: |
+          sed -i "s/^version: .*$/version: ${GITHUB_REF_NAME#v}/" pubspec.yaml
+      - name: Add release notes to changelog
+        run: |
+          gh release list --limit 100 --json tagName --jq '.[].tagName' \
+            | awk -v cur="$GITHUB_REF_NAME" -v last="$LAST_COMMITTED_CHANGELOG_TAG" '$0 == last { exit } $0 == cur { on = 1 } on' \
+            | while read -r tag; do gh release view "$tag" --json body --jq .body; echo; done > release-notes.md
+          cat release-notes.md CHANGELOG.md > CHANGELOG.new && mv CHANGELOG.new CHANGELOG.md && rm release-notes.md
+      - run: flutter pub get
+      - run: flutter pub publish -f
