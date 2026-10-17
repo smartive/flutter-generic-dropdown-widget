@@ -6,26 +6,23 @@ on:
       - main
       - next
 
-permissions:
-  contents: write
-  issues: write
-  pull-requests: write
-  actions: write
-
 jobs:
-  release:
-    name: Release
+  package_and_publish:
+    name: Package and Publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - run: flutter pub get
       - name: release
-        id: release
         uses: cycjimmy/semantic-release-action@v3
+        with:
+          extra_plugins: |
+            @semantic-release/exec
+            @semantic-release/git
+            @semantic-release/changelog
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # Tags pushed with GITHUB_TOKEN don't trigger workflows, so start the publish run explicitly.
-      - name: Trigger pub.dev publish
-        if: steps.release.outputs.new_release_published == 'true'
-        run: gh workflow run publish.yml --ref "v${{ steps.release.outputs.new_release_version }}"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CREDENTIALS: ${{ secrets.PUB_DEV_CREDENTIALS }}
