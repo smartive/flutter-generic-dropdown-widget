@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: read
-  id-token: write # pub.dev automated publishing via OIDC
 
 jobs:
   publish:
@@ -21,7 +20,6 @@ jobs:
       LAST_COMMITTED_CHANGELOG_TAG: v2.1.0
     steps:
       - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
@@ -35,4 +33,10 @@ jobs:
             | while read -r tag; do gh release view "$tag" --json body --jq .body; echo; done > release-notes.md
           cat release-notes.md CHANGELOG.md > CHANGELOG.new && mv CHANGELOG.new CHANGELOG.md && rm release-notes.md
       - run: flutter pub get
+      - name: Set up pub.dev credentials
+        run: |
+          mkdir -p ~/.config/dart
+          echo "$CREDENTIALS" > ~/.config/dart/pub-credentials.json
+        env:
+          CREDENTIALS: ${{ secrets.PUB_DEV_CREDENTIALS }}
       - run: flutter pub publish -f
