@@ -11,13 +11,13 @@ jobs:
     name: Package and Publish
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
         with:
           channel: 'stable'
       - run: flutter pub get
       - name: release
-        uses: cycjimmy/semantic-release-action@v8.1.3
+        uses: cycjimmy/semantic-release-action@d9bf53a078bd2f86aaffaec796dbb3d28f1b6f34 # v8.1.3
         with:
           extra_plugins: |
             @semantic-release/exec
